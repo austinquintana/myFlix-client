@@ -13,7 +13,7 @@ export const LoginView = ({ onLoggedIn }) => {
       Password: password
     };
 
-    fetch('https://road-movie-cinephiles.herokuapp.com/login', {
+    fetch('https://austinmovieapp.herokuapp.com/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

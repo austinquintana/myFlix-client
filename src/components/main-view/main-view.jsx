@@ -17,7 +17,7 @@ export const MainView = () => {
   useEffect(() => {
     if (!token) return;
 
-    fetch('https://road-movie-cinephiles.herokuapp.com/movies', {
+    fetch('https://austinmovieapp.herokuapp.com/', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => response.json())
