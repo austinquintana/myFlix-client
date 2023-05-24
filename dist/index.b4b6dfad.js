@@ -27291,49 +27291,26 @@ var _movieView = require("../movie-view/movie-view");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
-    const [movies, setMovies] = (0, _react.useState)([
-        {
-            id: 1,
-            Title: "The Shawshank Redemption",
-            Description: "Andy Dufresne (Tim Robbins) is sentenced to two consecutive life terms in prison for the murders of his wife and her lover and is sentenced to a tough prison. However, only Andy knows he didnt commit the crimes. ",
-            Genre: "Drama",
-            Director: "Frank Darabont",
-            ImageURL: "https://www.themoviedb.org/t/p/original/tNf2OIGrOfHh4j3VvMvKceIDoix.jpg",
-            Year: "1994"
-        },
-        {
-            id: 2,
-            Title: "Fight Club",
-            Description: "A depressed man (Edward Norton) suffering from insomnia meets a strange soap salesman named Tyler Durden (Brad Pitt) and soon finds himself living in his squalid house after his perfect apartment is destroyed.",
-            Genre: "Drama",
-            Director: "David Fincher",
-            ImageURL: "https://www.themoviedb.org/t/p/original/wlmGPHDbnOK4AwL37m6tegxO8A3.jpg",
-            Year: "1999"
-        },
-        {
-            id: 3,
-            Title: "The Lord of the Rings: The Fellowship of the Ring",
-            Description: "The first adventure in The Lord of the Rings trilogy!",
-            Genre: "Adventure",
-            Director: "Peter Jackson",
-            ImageURL: "https://www.themoviedb.org/t/p/original/mm1NV8GdBvlzI1xI590p3CvJMOJ.jpg",
-            Year: "2001"
-        }
-    ]);
+    const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
+    useEffect(()=>{
+        fetch("https://openlibrary.org/search.json?q=star+wars").then((response)=>response.json()).then((data)=>{
+            console.log("movies from api:", data);
+        });
+    }, []);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 40,
+        lineNumber: 19,
         columnNumber: 13
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 45,
+        lineNumber: 24,
         columnNumber: 16
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27344,16 +27321,16 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 51,
+                lineNumber: 30,
                 columnNumber: 17
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 49,
+        lineNumber: 28,
         columnNumber: 9
     }, undefined);
 };
-_s(MainView, "N2DMurdUlYj9jDYDbIFRT+SFhJU=");
+_s(MainView, "PO+XgOji7E32nFJj3H5UPLPJ7w4=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
