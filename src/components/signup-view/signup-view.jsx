@@ -17,7 +17,7 @@
        Birthday: birthday
      };
 
-     fetch('https://austinmovieapp.herokuapp.com/', {
+     fetch('https://austinmovieapp.herokuapp.com/users', {
        method: 'POST',
        body: JSON.stringify(data),
        headers: {
