@@ -35,7 +35,7 @@ export const MovieView = ({ movie, onBackClick }) => {
           <span>No genres available</span>
         )}
       </div>
-      <Button variant='secondary' onClick={onBackClick} className='m-1'>
+      <Button variant='secondary' onClick={onBackClick} className='back-button' style={{ cursor: "pointer" }}>
         Back
       </Button>
     </div>

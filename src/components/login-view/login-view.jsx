@@ -13,7 +13,7 @@
        Password: password
      };
 
-     fetch('https://austinmovieapp.herokuapp.com/', {
+     fetch('https://austinmovieapp.herokuapp.com/login', {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json'
