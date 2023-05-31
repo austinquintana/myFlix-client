@@ -14,11 +14,12 @@ export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const apiURL = process.env.API_URL || 'http://localhost:8080/cfDB';
 
   useEffect(() => {
     if (!token) return;
 
-    fetch('https://austinmovieapp.herokuapp.com/movies', {
+    fetch('${apiURL}/movies', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => response.json())

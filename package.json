@@ -2,7 +2,9 @@
   "name": "myflix-client",
   "version": "1.0.0",
   "description": "",
+  "source": "src/index.html",
   "scripts": {
+    "dev": "parcel",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -10,6 +12,7 @@
   "dependencies": {
     "bootstrap": "^5.2.0",
     "dom": "^0.0.3",
+    "dotenv": "^16.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
@@ -19,7 +22,7 @@
     "react-scripts": "4.0.0"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.8.3",
+    "@parcel/transformer-sass": "^2.9.1",
     "parcel": "^2.9.1",
     "process": "^0.11.10"
   }

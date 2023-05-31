@@ -13,7 +13,7 @@ export const LoginView = ({ onLoggedIn }) => {
       Password: password
     };
 
-    fetch('https://austinmovieapp.herokuapp.com/login', {
+    fetch('http://localhost:8080/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ export const LoginView = ({ onLoggedIn }) => {
           type='password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          minLength={7}
+          minLength={1}
           required
         />
       </Form.Group>
