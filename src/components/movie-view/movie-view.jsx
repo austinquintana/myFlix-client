@@ -8,9 +8,9 @@ export const MovieView = ({ movies }) => {
   const movie = movies.find((m) => m.id === movieId);
 
   return (
-    <div>
-      <div>
-        <img className="w-100" src={movie.image} />
+    <div className="movie-view">
+      <div className="movie-container">
+        <img className="w-100 movie-image" src={movie.image} alt={movie.title} />
       </div>
       <div>
         <span>Title: </span>

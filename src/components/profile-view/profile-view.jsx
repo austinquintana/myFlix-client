@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, Col, Form, Button } from "react-bootstrap";
+import { Card, Col, Form, Button, Row } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 // const apiURL = process.env.API_URL || 'http://localhost:8080/';
 
@@ -10,7 +10,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
     const [email, setEmail] = useState("");
     const [birthdate, setBirthdate] = useState("");
 
-    let favoriteMovies = movies.filter(movie => user.favoriteMovies.includes(movie.id));
+    let favoriteMovies = movies.filter((movie) => user.favoriteMovies.includes(movie.id));
     
     const handleSubmit = event => {
         event.preventDefault();
@@ -22,7 +22,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
             birthdate
         }
 
-        fetch('http://localhost:8080/users/${user.username}', {
+        fetch(`http://localhost:8080/users/${user.username}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {
@@ -51,7 +51,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
 
     const deleteAccount = () => {
         console.log("doing")
-        fetch('http://localhost:8080/movies/users/${user.username}', {
+        fetch(`http://localhost:8080/movies/users/${user.username}`, {
             method: "DELETE",
             headers: { Authorization: `Bearer ${token}` }
         })
@@ -147,6 +147,6 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
                     <MovieCard movie={movie} />
                 </Col>
             ))}
-        </>
+         </>
     );
 }

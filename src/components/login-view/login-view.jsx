@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import './login-view.scss';
 // const apiURL = process.env.API_URL || 'http://localhost:8080/';
 
 export const LoginView = ({ onLoggedIn }) => {
@@ -38,6 +39,7 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
+    <div className="login-form-container">
     <Form onSubmit={handleSubmit} className='mt-2'>
       <Form.Group controlId='username'>
         <Form.Label>Username:</Form.Label>
@@ -61,5 +63,6 @@ export const LoginView = ({ onLoggedIn }) => {
       </Form.Group>
       <Button variant='primary' type='submit' className='mt-1'>Login</Button>
     </Form>
+    </div>
   );
 };
