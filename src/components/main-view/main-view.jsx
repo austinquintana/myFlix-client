@@ -17,9 +17,13 @@ export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const storedToken = localStorage.getItem('token');
   const [movies, setMovies] = useState([]);
+  const [viewMovies, setViewMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
+
+//   const [user, setUser] = useState(null);
+//   const [token, setToken] = useState(null);
   // const apiURL = process.env.API_URL || 'http://localhost:8080/';
 
 
@@ -42,7 +46,7 @@ export const MainView = () => {
           return {
             _id: movie._id,
             Title: movie.Title,
-            ImagePath: movie.ImagePath,
+            ImagePath: movie.imagePath,
             Director: {
               Name: movie.Director.firstName,
               Bio: movie.Director.Bio,
@@ -70,10 +74,14 @@ export const MainView = () => {
                 onLoggedOut={() => {
                     setUser(null);
                     setToken(null);
-                    localStorage.clear();
+                    // localStorage.clear();
+                    localStorage.removeItem("user");
+                    localStorage.removeItem("token");
                 }}
                 onSearch={(query) => {
-                    setViewMovies(movies.filter(movie => movie.title.toLowerCase().includes(query.toLowerCase())));
+                    setViewMovies
+                    (movies.filter((movie) => 
+                        movie.title.toLowerCase().includes(query.toLowerCase())));
                 }}
             />
             <Container>
@@ -105,6 +113,8 @@ export const MainView = () => {
                                                 onLoggedIn={(user, token) => {
                                                     setUser(user);
                                                     setToken(token);
+                                                    localStorage.setItem("user", JSON.stringify(user));
+                                                    localStorage.setItem("token", token);
                                                 }}
                                             />
                                         </Col>
@@ -113,8 +123,9 @@ export const MainView = () => {
                             }
                         />
                         <Route
-                            path="/profile"
+                            path="/users"
                             element={
+                                <>
                                 !user ? (
                                     <Navigate to="/login" replace />
                                 ) : (
@@ -124,6 +135,7 @@ export const MainView = () => {
                                         localStorage.clear();
                                     }} updateUser={updateUser}/>
                                 )
+                                </>
                             }
                         />
                         <Route
