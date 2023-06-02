@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+// const apiURL = process.env.API_URL || 'http://localhost:8080/';
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -57,7 +59,7 @@ export const LoginView = ({ onLoggedIn }) => {
           required
         />
       </Form.Group>
-      <Button variant='primary' type='submit' className='mt-1'>Log In</Button>
+      <Button variant='primary' type='submit' className='mt-1'>Login</Button>
     </Form>
   );
 };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Button, Card } from "react-bootstrap";
-const apiURL = process.env.API_URL || 'http://localhost:8080/cfDB';
+// const apiURL = process.env.API_URL || 'http://localhost:8080/';
 
 export const SignupView = () => {
     const [username, setUsername] = useState("");
@@ -17,7 +17,7 @@ export const SignupView = () => {
             Email: email,
         }
 
-        fetch("${apiURL}/users", {
+        fetch('http://localhost:8080/users', {
             method: "POST",
             body: JSON.stringify(data),
             headers: { "Content-Type": "application/json" }
