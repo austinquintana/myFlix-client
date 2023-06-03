@@ -14,16 +14,14 @@ import { ProfileView } from '../profile-view/profile-view';
 
 
 export const MainView = () => {
-  const storedUser = JSON.parse(localStorage.getItem('user'));
-  const storedToken = localStorage.getItem('token');
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedToken = localStorage.getItem("token");
   const [movies, setMovies] = useState([]);
   const [viewMovies, setViewMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
   const [token, setToken] = useState(localStorage.getItem("token") || null);
 
-//   const [user, setUser] = useState(null);
-//   const [token, setToken] = useState(null);
   // const apiURL = process.env.API_URL || 'http://localhost:8080/';
 
 
@@ -54,7 +52,8 @@ export const MainView = () => {
             Description: movie.Description,
             Year: movie.Year,
             Genres: movie.Genres,
-            Featured: movie.Featured
+            Featured: movie.Featured,
+            Actors: movie.Actors
           };
         });
 
@@ -74,7 +73,6 @@ export const MainView = () => {
                 onLoggedOut={() => {
                     setUser(null);
                     setToken(null);
-                    // localStorage.clear();
                     localStorage.removeItem("user");
                     localStorage.removeItem("token");
                 }}
@@ -123,10 +121,10 @@ export const MainView = () => {
                             }
                         />
                         <Route
-                            path="/users"
+                            path="/user"
                             element={
                                 <>
-                                !user ? (
+                                {!user ? (
                                     <Navigate to="/login" replace />
                                 ) : (
                                     <ProfileView user={user} token={token} movies={movies} onLoggedOut={() => {
@@ -134,7 +132,7 @@ export const MainView = () => {
                                         setToken(null);
                                         localStorage.clear();
                                     }} updateUser={updateUser}/>
-                                )
+                                )}
                                 </>
                             }
                         />

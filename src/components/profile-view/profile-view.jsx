@@ -10,7 +10,10 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
     const [email, setEmail] = useState("");
     const [birthdate, setBirthdate] = useState("");
 
-    let favoriteMovies = movies.filter((movie) => user.favoriteMovies.includes(movie.id));
+    let favoriteMovies = [];
+        if (user && user.favoriteMovies) {
+            favoriteMovies = movies.filter(movie => user.favoriteMovies.includes(movie.id));
+    }
     
     const handleSubmit = event => {
         event.preventDefault();
@@ -26,7 +29,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
             method: "PUT",
             body: JSON.stringify(data),
             headers: {
-                Authorization: `Bearer ${token}`,
+                // Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json"
             }
         })
@@ -72,23 +75,8 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
 
     return (
         <>
-            <Col md={6}>           
-                <Card className="mt-2 mb-3">
-                    <Card.Body>
-                        <Card.Title >Your info</Card.Title>
-                        <p>Username: {user.username}</p>
-                        <p>Email: {user.email}</p>
-                        <p>Birthdate: {user.birthdate.slice(0, 10)}</p>
-                    </Card.Body>
-                </Card>
-                <Button variant="danger" onClick={() => {
-                    if (confirm("Are you sure?")) {
-                        deleteAccount();
-                    }
-                }}>Delete user account</Button>
-            </Col>
             <Col md={6}>
-                <Card className="mt-2 mb-3">
+                <Card className="mt-5">
                     <Card.Body>
                         <Card.Title>Update your info</Card.Title>
                         <Form onSubmit={handleSubmit}>
@@ -140,7 +128,7 @@ export const ProfileView = ({ user, token, movies, onLoggedOut, updateUser }) =>
                 </Card>
             </Col>
             <Col md={12}>
-                <h3 className="mt-3 mb-3 text-light">Your favorite movies:</h3>
+                <h3 className="mt-3 mb-3">Your favorite movies:</h3>
             </Col>
             {favoriteMovies.map(movie => (
                 <Col className="mb-4" key={movie.id} xl={2} lg={3} md={4} xs={6}>

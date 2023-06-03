@@ -10,8 +10,16 @@
   margin-bottom: 10px;
 }
 
+.back-button {
+  background-color: #fff;
+}
+
 .login-form-container {
   margin-top: 100px;
+}
+
+.sign-up-container {
+  margin-top: 200px;
 }
 
 .my-flix {
