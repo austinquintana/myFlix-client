@@ -8,7 +8,7 @@ export const ProfileDeleteView = ({user, token, onDelete}) => {
     const handleSubmit = (event) => {
         event.preventDefault()
         if (controlUsername === user.Username) {
-            fetch(`https://myflix-5sws.onrender.com/users/${user._id}`, {
+            fetch(`http://localhost:8080/users/${user._id}`, {
                 headers: { Authorization: `Bearer ${token}` },
                 method: "DELETE"
             }).then((result) => {
@@ -27,10 +27,10 @@ export const ProfileDeleteView = ({user, token, onDelete}) => {
 
     return(
         <Form onSubmit={handleSubmit} className="mt-2">
-            <Row>
+            
                 <Col sm={{offset: 2}} md={{offset: 4}} className="fw-bold fs-5 align-self-center mb-3">Delete account: </Col>
-            </Row>
-            <Row className="mb-3">
+            
+            
                 <FormGroup controlId="fromControlDelete" as={Col} sm={{offset: 2}} md={{offset: 4}}>
                     <Form.Label>Enter your username:</Form.Label>
                     <Form.Control 
@@ -43,12 +43,12 @@ export const ProfileDeleteView = ({user, token, onDelete}) => {
                     />
                 </FormGroup>
                 <Col sm={{offset: 1}} md={{offset: 3}} className="desktop desktop-long"></Col>
-            </Row>
-            <Row className="mb-3">
+            
+            
                 <Col sm={{offset: 2}} md={{offset: 4}} >
                     <Button variant="primary" type="submit">Submit</Button>
                 </Col>
-            </Row>
+           
         </Form>
     )
 }
