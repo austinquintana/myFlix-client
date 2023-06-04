@@ -9,13 +9,13 @@ import { FavoriteMovies } from './favorite-movies';
 export const ProfileView = ({ user, updateUserInfo, movies }) => {
 
   return (
-    <>
-      <h2>User Profile</h2>
+    <div className="mt-5">
+      <h2>Your registration details: </h2>
       <UserInfo user={user}/>
       <br />
       <UserUpdate updateUserInfo={updateUserInfo} />
       <br />
       <FavoriteMovies updateUserInfo={updateUserInfo} movies={movies} user={user} />
-    </>
+    </div>
   )
 };

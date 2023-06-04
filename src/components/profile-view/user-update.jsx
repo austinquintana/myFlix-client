@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card, Col, Form, Button} from "react-bootstrap";
+import { UserDelete } from "./user-delete";
 // const apiURL = process.env.API_URL || 'http://localhost:8080/';
 
 export const UserUpdate = ({ updateUser }) => {
@@ -98,6 +99,7 @@ export const UserUpdate = ({ updateUser }) => {
                                 />
                             </Form.Group>
                             <Button className="mt-3" variant="primary" type="submit">Submit</Button>
+                            <UserDelete />
                         </Form>
                     </Card.Body>
                 </Card>
