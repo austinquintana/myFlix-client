@@ -36,6 +36,6 @@ export const UserDelete = () => {
   };
 
   return (
-    <Button onClick={handleDelete} variant='danger' className='ms-3'>Delete your account</Button>
+    <Button onClick={handleDelete} variant='danger' className='ms-3 mt-3'>Delete your account</Button>
   )
 };
