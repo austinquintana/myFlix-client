@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 export const UserInfo = ({ user }) => {
   
   return (
-    <Card style={{backgroundColor: 'DarkGray'}}>
+    <Card style={{backgroundColor: 'Darkgray'}}>
       <Card.Body>
         <Card.Title className="profile-title" style={{color: '#194545'}}>User Info</Card.Title>
         <Card.Text className="profile-text">
