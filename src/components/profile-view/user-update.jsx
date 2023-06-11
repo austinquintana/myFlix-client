@@ -8,6 +8,7 @@ export const UserUpdate = ({ updateUser }) => {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [birthdate, setBirthdate] = useState("");
+    const apiURL = process.env.API_URL || 'http://localhost:8080'; 
     
     const handleSubmit = event => {
         event.preventDefault();
@@ -16,11 +17,10 @@ export const UserUpdate = ({ updateUser }) => {
             username: username,
             password: password,
             email: email,
-            birthdate: birthdate,
         }
     
 
-        fetch(`http://localhost:8080/users/${user.username}`, {
+        fetch(`${apiURL}/users/${user.Username}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {
@@ -84,16 +84,6 @@ export const UserUpdate = ({ updateUser }) => {
                                     type="email"
                                     value={email}
                                     onChange={e => setEmail(e.target.value)}
-                                    required
-                                    className="bg-light"
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Birthdate:</Form.Label>
-                                <Form.Control
-                                    type="date"
-                                    value={birthdate}
-                                    onChange={e => setBirthdate(e.target.value)}
                                     required
                                     className="bg-light"
                                 />

@@ -12,12 +12,12 @@ export const MovieCard = ({ movie, user, updateUserInfo }) => {
   // //     setIsFavorite(user.favoriteMovies.includes(movie._id))
   // //   }
   // // }, [movie]);
-
+  const apiURL = process.env.API_URL || 'http://localhost:8080';
   const addFavorite = () => {
 
     const token = localStorage.getItem('token');
-
-    fetch(`https://localhost:8080/users/${user.userName}/movies/${movie._id}`, {
+    console.log(user);
+    fetch(`${apiURL}/users/${user.Username}/movies/${movie._id}`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -28,11 +28,12 @@ export const MovieCard = ({ movie, user, updateUserInfo }) => {
           alert('Fail');
         }
       })
-      .then((user) => {
-        if (user) {
-          alert(`You successfully added the movie '${movie.title}' to your favorites list.`);
+      .then((updateUser) => {
+        console.log(updateUser);
+        if (updateUser) {
+          alert(`You successfully added the movie '${movie.Title}' to your favorites list.`);
           setIsFavorite(true);
-          updateUserInfo(user);
+          updateUserInfo(updateUser);
         }
       })
       .catch((error) => {
@@ -44,7 +45,7 @@ export const MovieCard = ({ movie, user, updateUserInfo }) => {
 
     const token = localStorage.getItem('token');
 
-    fetch(`https://localhost:8080/users/${user.userName}/movies/${movie._id}`, {
+    fetch(`${apiURL}/users/${user.Username}/movies/${movie._id}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -57,7 +58,7 @@ export const MovieCard = ({ movie, user, updateUserInfo }) => {
       })
       .then((user) => {
         if (user) {
-          alert(`You deleted the movie '${movie.title}' off of your favorites list.`);
+          alert(`You deleted the movie '${movie.Title}' off of your favorites list.`);
           setIsFavorite(false);
           updateUserInfo(user);
         }
@@ -75,7 +76,7 @@ export const MovieCard = ({ movie, user, updateUserInfo }) => {
           <Card.Title>{movie.Title}</Card.Title>
         </Card.Body>
           
-          <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
+          <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
             <Button className="border text-blue font-bold bg-gray-300" variant="link">See more</Button>
           </Link>
         
@@ -91,16 +92,16 @@ export const MovieCard = ({ movie, user, updateUserInfo }) => {
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     _id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    Title: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    genres: PropTypes.shape({
-      genreName: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      GenreName: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
     }),
-    director: PropTypes.shape({
-      directorName: PropTypes.string.isRequired,
-      bio: PropTypes.string.isRequired,
+    Director: PropTypes.shape({
+      DirectorName: PropTypes.string.isRequired,
+      Bio: PropTypes.string.isRequired,
     }),
   }).isRequired,
 };

@@ -4,6 +4,7 @@ export const UserDelete = () => {
 
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const storedToken = localStorage.getItem('token');
+  const apiURL = process.env.API_URL || 'http://localhost:8080';
 
   const handleDelete = (event) => {
     event.preventDefault();
@@ -12,7 +13,7 @@ export const UserDelete = () => {
 
     warning === false
       ? alert('Thanks for sticking around.')
-      : fetch(`https://localhost:8080/users/${storedUser.userName}`, {
+      : fetch(`${apiURL}/users/${storedUser.Username}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${storedToken}`,
@@ -21,7 +22,7 @@ export const UserDelete = () => {
       })
         .then((response) => {
           if (response.ok) {
-            alert(`You successfully deleted the account with the username of '${storedUser.userName}'.`);
+            alert(`You successfully deleted the account with the username of '${storedUser.Username}'.`);
             localStorage.clear();
             window.location.reload();
           } else if (response.status === 400) {

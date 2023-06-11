@@ -9,15 +9,11 @@ export const UserInfo = ({ user }) => {
         <Card.Title className="profile-title" style={{color: '#194545'}}>User Info</Card.Title>
         <Card.Text className="profile-text">
           <span className="label">Username: </span>
-          <span className="value">{user.UserName}</span>
+          <span className="value">{user.Username}</span>
         </Card.Text>
         <Card.Text className="profile-text">
           <span className="label">Email: </span>
-          <span className="value">{user.email}</span>
-        </Card.Text>
-        <Card.Text className="profile-text">
-          <span className="label">Birthday: </span>
-          <span className="value">{new Date(user.Birthday).toLocaleDateString('en-GB')}</span>
+          <span className="value">{user.Email}</span>
         </Card.Text>
         </Card.Body>
     </Card>
