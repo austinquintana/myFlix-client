@@ -151,9 +151,10 @@ useEffect(() => {
                             }
                         />
                         <Route
-                        path="/movies/:movie_id"
+                        path="/movies/:id"
                         element={
-                            !user ? <Navigate to="/login" replace />
+                            <>
+                            {!user ? (<Navigate to="/login" replace />)
                             : movies.length === 0 ? (
                                 <Col style={{color: "white"}}><p>The list is empty. Loading data from api...</p></Col>
                             ) : (
@@ -161,8 +162,9 @@ useEffect(() => {
                              movies={movies} 
                              user={user} 
                              token={token} 
-                             updateUser={updateUser}/>
-                            )
+                             updateUserInfo={updateUser}/>
+                            )}
+                            </>
                           }
                         />
                         <Route
@@ -188,7 +190,7 @@ useEffect(() => {
                                             </Col>
                                             {filteredMovies.map(movie => (
                                                 <Col className="mb-4" key={movie.id} xl={2} lg={3} md={4} xs={6}>
-                                                    <MovieCard movie={movie} user={user} />
+                                                    <MovieCard movie={movie} user={user} updateUserInfo={updateUser}/>
                                                 </Col>
                                             ))}
                                         </>

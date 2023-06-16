@@ -6,8 +6,11 @@ import "./movie-view.scss";
 
 export const MovieView = ({ user, movies, updateUserInfo }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const { movie_id } = useParams();
-  const movie = movies.find( movie => movie._id === movie_id);
+  const p = useParams();
+  const movie_id = "";
+  console.log(p);
+  const movie = movies.find( m => m._id === movie_id);
+  console.log(movie_id);
   const apiURL = process.env.API_URL || 'http://localhost:8080';
 
   console.log('Movie ID from URL:', movie_id);

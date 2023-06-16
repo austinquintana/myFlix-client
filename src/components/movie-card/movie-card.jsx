@@ -7,11 +7,11 @@ import './movie-card.scss';
 
 export const MovieCard = ({ movie, user, updateUserInfo }) => {
   const [isFavorite, setIsFavorite] = React.useState(false);
-  //  useEffect(() => {
-  // //   if (user.favoriteMovies && movie._id) {
-  // //     setIsFavorite(user.favoriteMovies.includes(movie._id))
-  // //   }
-  // // }, [movie]);
+   useEffect(() => {
+    if (user.favoriteMovies && movie._id) {
+      setIsFavorite(user.favoriteMovies.includes(movie._id))
+    }
+  }, [user, movie]);
   const apiURL = process.env.API_URL || 'http://localhost:8080';
   const addFavorite = () => {
 
@@ -32,7 +32,7 @@ export const MovieCard = ({ movie, user, updateUserInfo }) => {
         console.log(updateUser);
         if (updateUser) {
           alert(`You successfully added the movie '${movie.Title}' to your favorites list.`);
-          setIsFavorite(true);
+          // setIsFavorite(true);
           updateUserInfo(updateUser);
         }
       })
@@ -53,13 +53,14 @@ export const MovieCard = ({ movie, user, updateUserInfo }) => {
         if (response.ok) {
           return response.json();
         } else {
+          console.log(response);
           alert('Something went wrong.');
         }
       })
       .then((user) => {
         if (user) {
           alert(`You deleted the movie '${movie.Title}' off of your favorites list.`);
-          setIsFavorite(false);
+          // setIsFavorite(false);
           updateUserInfo(user);
         }
       })
