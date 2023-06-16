@@ -10,17 +10,24 @@ export const SignupView = () => {
     const [ controlPassword, setControlPassword ] = useState("");
     const [email, setEmail] = useState("");
     const [birthdate, setBirthdate] = useState("");
-
+    const apiURL = process.env.API_URL || 'http://localhost:8080';
+    
     const handleSubmit = event => {
         event.preventDefault();
 
+        if (password!== controlPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+        
         const data = {
             Username: username,
             Password: password,
+            ControlPassword: controlPassword,
             Email: email,
         }
 
-        fetch('http://localhost:8080/users', {
+        fetch(`${apiURL}/users`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: { "Content-Type": "application/json" }

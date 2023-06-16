@@ -12,6 +12,7 @@ import { LoginView } from '../login-view/login-view';
 import { SignupView } from '../signup-view/signup-view';
 import { ProfileView } from '../profile-view/profile-view';
 
+const apiURL = process.env.API_URL || 'http://localhost:8080';
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -22,14 +23,14 @@ export const MainView = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
   const [token, setToken] = useState(localStorage.getItem("token") || null);
 
-  // const apiURL = process.env.API_URL || 'http://localhost:8080/';
+  
 
 
   useEffect(() => {
     if (!token) return; 
 
 
-    fetch('http://localhost:8080/movies', {
+    fetch(`${apiURL}/movies`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => response.json())
@@ -74,7 +75,7 @@ useEffect(() => {
   // setFilteredMovies call tempArray, that has just the movies that have the searchQuery in the title
   const handleSearch = (e) => {
     const searchQuery = e.target.value.toLowerCase();
-    let tempArray = movies.filter((index) => index.title.toLowerCase().includes(searchQuery));
+    let tempArray = movies.filter((movie) => movie.Title && movie.Title.toLowerCase().includes(searchQuery));
     setFilteredMovies(tempArray);
   }
 
@@ -150,18 +151,21 @@ useEffect(() => {
                             }
                         />
                         <Route
-                            path="/movies/:movieId"
-                            element={
-                                <>
-                                    {!user ? (
-                                        <Navigate to="/login" replace />
-                                    ) : movies.length === 0 ? ( 
-                                        <Col style={{color: "white"}}><p>The list is empty. Loading data from api...</p></Col>
-                                    ) : (
-                                        <MovieView movies={movies} user={user} token={token} updateUser={updateUser}/>
-                                    )}
-                                </>
-                            }
+                        path="/movies/:id"
+                        element={
+                            <>
+                            {!user ? (<Navigate to="/login" replace />)
+                            : movies.length === 0 ? (
+                                <Col style={{color: "white"}}><p>The list is empty. Loading data from api...</p></Col>
+                            ) : (
+                             <MovieView 
+                             movies={movies} 
+                             user={user} 
+                             token={token} 
+                             updateUserInfo={updateUser}/>
+                            )}
+                            </>
+                          }
                         />
                         <Route
                             path="/"
@@ -184,9 +188,9 @@ useEffect(() => {
                                                  />
                                             </Form>
                                             </Col>
-                                            {movies.map(movie => (
+                                            {filteredMovies.map(movie => (
                                                 <Col className="mb-4" key={movie.id} xl={2} lg={3} md={4} xs={6}>
-                                                    <MovieCard movie={movie} />
+                                                    <MovieCard movie={movie} user={user} updateUserInfo={updateUser}/>
                                                 </Col>
                                             ))}
                                         </>

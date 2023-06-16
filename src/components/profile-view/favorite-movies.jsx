@@ -14,12 +14,12 @@ export const FavoriteMovies = ({ movies, onAddFavorite, onRemoveFavorite }) => {
       <Row xs={1} md={1} lg={2} className="g-4">
         {movies &&
           movies
-            .filter((movie) => favorites.includes(movie.id))
+            .filter((movie) => favorites.includes(movie._id))
             .map((movie) => (
               <Col key={movie.id}>
                 <MovieCard
                   movie={movie}
-                  fav={favorites.includes(movie.id)}
+                  fav={favorites.includes(movie._id)}
                   onAddToFavorites={onAddFavorite}
                   onRemoveFromFavorites={onRemoveFavorite}
                 />

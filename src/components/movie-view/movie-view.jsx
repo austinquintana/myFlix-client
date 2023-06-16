@@ -6,8 +6,22 @@ import "./movie-view.scss";
 
 export const MovieView = ({ user, movies, updateUserInfo }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const { movieId } = useParams();
-  const movie = movies.find((m) => m.id === movieId);
+  const p = useParams();
+  const movie_id = "";
+  console.log(p);
+  const movie = movies.find( m => m._id === movie_id);
+  console.log(movie_id);
+  const apiURL = process.env.API_URL || 'http://localhost:8080';
+
+  console.log('Movie ID from URL:', movie_id);
+  console.log('Movies:', movie);
+
+  if (movie) {
+    console.log('Found movie:', movie);
+    console.log('Movie ID:', movie._id);
+  } else {
+    console.log('No movie found');
+  }
 
   useEffect(() => {
     if (user.favoriteMovies && movie._id) {
@@ -15,38 +29,11 @@ export const MovieView = ({ user, movies, updateUserInfo }) => {
     }
   }, [movie]);
 
-  const addFavorite = () => {
-
-    const token = localStorage.getItem("token");
-
-    fetch(`https://localhost:8080/users/${user.userName}/movies/${movie._id}`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          alert("Fail");
-        }
-      })
-      .then((user) => {
-        if (user) {
-          alert(`You successfully added the movie '${movie.title}' to your favorites list.`);
-          setIsFavorite(true);
-          updateUserInfo(user);
-        }
-      })
-      .catch((error) => {
-        alert("Error message: " + error);
-      });
-  };
-
   const deleteFavorite = () => {
 
     const token = localStorage.getItem("token");
 
-    fetch(`https://localhost:8080/users/${user.userName}/movies/${movie._id}`, {
+    fetch(`${apiURL}/users/${user.Username}/${movie.Title}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -59,7 +46,7 @@ export const MovieView = ({ user, movies, updateUserInfo }) => {
       })
       .then((user) => {
         if (user) {
-          alert(`You deleted the movie '${movie.title}' off of your favorites list.`);
+          alert(`You deleted the movie '${movie.Title}' off of your favorites list.`);
           setIsFavorite(false);
           updateUserInfo(user);
         }
@@ -68,6 +55,10 @@ export const MovieView = ({ user, movies, updateUserInfo }) => {
         alert("Error message: " + error);
       });
   };
+
+  if (!movie) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="movie-view">

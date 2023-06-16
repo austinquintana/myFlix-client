@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import { Link } from'react-router-dom';
 import './login-view.scss';
-// const apiURL = process.env.API_URL || 'http://localhost:8080/';
+// const apiURL = process.env.API_URL || 'http://localhost:8080';
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const apiURL = process.env.API_URL || 'http://localhost:8080';
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,7 +17,7 @@ export const LoginView = ({ onLoggedIn }) => {
       Password: password
     };
 
-    fetch('http://localhost:8080/login', {
+    fetch(`${apiURL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
