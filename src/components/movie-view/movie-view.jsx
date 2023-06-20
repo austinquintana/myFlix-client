@@ -1,60 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./movie-view.scss";
+import { addFavorite, deleteFavorite } from '../../api.js';
 
 export const MovieView = ({ user, movies, updateUserInfo }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = React.useState(false);
+   useEffect(() => {
+    if (user.favoriteMovies && movie._id) {
+      setIsFavorite(user.favoriteMovies.includes(movie._id))
+    }
+  }, [user]);
   const p = useParams();
-  const movie_id = "";
-  console.log(p);
-  const movie = movies.find( m => m._id === movie_id);
-  console.log(movie_id);
-  const apiURL = process.env.API_URL || 'http://localhost:8080';
-
-  console.log('Movie ID from URL:', movie_id);
-  console.log('Movies:', movie);
-
-  if (movie) {
-    console.log('Found movie:', movie);
-    console.log('Movie ID:', movie._id);
-  } else {
-    console.log('No movie found');
-  }
+  const movie = movies.find( m => m._id === p.id);
 
   useEffect(() => {
     if (user.favoriteMovies && movie._id) {
       setIsFavorite(user.favoriteMovies.includes(movie._id))
     }
   }, [movie]);
-
-  const deleteFavorite = () => {
-
-    const token = localStorage.getItem("token");
-
-    fetch(`${apiURL}/users/${user.Username}/${movie.Title}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          alert("Something went wrong.");
-        }
-      })
-      .then((user) => {
-        if (user) {
-          alert(`You deleted the movie '${movie.Title}' off of your favorites list.`);
-          setIsFavorite(false);
-          updateUserInfo(user);
-        }
-      })
-      .catch((error) => {
-        alert("Error message: " + error);
-      });
-  };
 
   if (!movie) {
     return <div>Loading...</div>;
@@ -73,23 +38,9 @@ export const MovieView = ({ user, movies, updateUserInfo }) => {
         <p>{movie.Description}</p>
       </div>
       {isFavorite
-            ? (
-              <Button
-                onClick={deleteFavorite}
-                variant="warning"
-                className="movie-fav-button mt-4">
-                Remove from List
-              </Button>
-            )
-            : (
-              <Button
-                onClick={addFavorite}
-                variant="success"
-                className="movie-fav-button mt-4">
-                Add to favorites
-              </Button>
-            )
-          }
+        ? (<Button onClick={() => deleteFavorite(updateUserInfo, user.Username, movie)} variant='warning' className='m-3'>Remove from favorites</Button>)
+        : (<Button onClick={() => addFavorite(updateUserInfo, user.Username, movie)} variant='success' className='m-3'>Add to favorites</Button>)
+      }
 
         {/* <div>
           <h4>Director</h4>
