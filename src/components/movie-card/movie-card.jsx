@@ -22,7 +22,7 @@ export const MovieCard = ({ movie, user, updateUserInfo }) => {
         </Card.Body>
           
           <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-            <Button className="border text-blue font-bold bg-gray-300" variant="link">See more</Button>
+            <Button className="border text-blue font-bold bg-gray-300 m-4" variant="link">See more</Button>
           </Link>
         
           {isFavorite

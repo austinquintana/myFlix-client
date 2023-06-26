@@ -5,25 +5,19 @@ import { Button } from "react-bootstrap";
 import "./movie-view.scss";
 import { addFavorite, deleteFavorite } from '../../api.js';
 
-export const MovieView = ({ user, movies, updateUserInfo }) => {
+export const MovieView = ({ movies, user, updateUserInfo }) => {
   const [isFavorite, setIsFavorite] = React.useState(false);
+  const p = useParams();
+  const movie = movies.find( m => m._id === p.id);
+  if (!movie) {
+    return <div>Loading...</div>;
+  }
+
    useEffect(() => {
     if (user.favoriteMovies && movie._id) {
       setIsFavorite(user.favoriteMovies.includes(movie._id))
     }
-  }, [user]);
-  const p = useParams();
-  const movie = movies.find( m => m._id === p.id);
-
-  useEffect(() => {
-    if (user.favoriteMovies && movie._id) {
-      setIsFavorite(user.favoriteMovies.includes(movie._id))
-    }
-  }, [movie]);
-
-  if (!movie) {
-    return <div>Loading...</div>;
-  }
+  }, [user, movie]);
 
   return (
     <div className="movie-view">
@@ -37,23 +31,32 @@ export const MovieView = ({ user, movies, updateUserInfo }) => {
         <h4>Plot: </h4>
         <p>{movie.Description}</p>
       </div>
+      <div>
+        <h4>Director: </h4>
+        <p>{movie.Director.Name}</p>
+      </div>
+      <div>
+        <h4>Biography of the director: </h4>
+        <p>{movie.Director.Bio}</p>
+      </div>
+      <div>
+        <h4>Birth Year: </h4>
+        <p>{movie.Director.Birth}</p>
+      </div>
+      <div>
+        <h4>Genre: </h4>
+        <p>{movie.Genre.Name}</p>
+      </div>
+      <div>
+        <h4>Genre Description: </h4>
+        <p>{movie.Genre.Description}</p>
+      </div>
       {isFavorite
         ? (<Button onClick={() => deleteFavorite(updateUserInfo, user.Username, movie)} variant='warning' className='m-3'>Remove from favorites</Button>)
         : (<Button onClick={() => addFavorite(updateUserInfo, user.Username, movie)} variant='success' className='m-3'>Add to favorites</Button>)
       }
-
-        {/* <div>
-          <h4>Director</h4>
-          <p>{movie.Director.directorName}</p>
-          <h4>More details about {movie.director.directorName}</h4>
-          <p>{movie.Director.bio}</p>
-          <h4>Genre</h4>
-          <p>{movie.Genre.genreName}</p>
-          <h4>More details about {movie.genre.genreName}</h4>
-          <p>{movie.Genre.description}</p>
-        </div> */}
       <Link to={`/`}>
-        <button className="back-button border text-white bg-black">Back</button>
+        <button className="back-button m-3">Back</button>
       </Link>
 
     </div>

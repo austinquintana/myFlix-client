@@ -3,7 +3,7 @@ import { Card, Col, Form, Button} from "react-bootstrap";
 import { UserDelete } from "./user-delete";
 // const apiURL = process.env.API_URL || 'http://localhost:8080/';
 
-export const UserUpdate = ({ updateUser }) => {
+export const UserUpdate = ({ updateUser, user}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -97,3 +97,4 @@ export const UserUpdate = ({ updateUser }) => {
          </>
     );
 }
+

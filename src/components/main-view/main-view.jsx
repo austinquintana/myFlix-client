@@ -42,12 +42,13 @@ export const MainView = () => {
             Title: movie.Title,
             ImagePath: movie.imagePath,
             Director: {
-              Name: movie.Director.firstName,
+              Name: movie.Director.Name,
               Bio: movie.Director.Bio,
+              Birth: movie.Director.Birth, 
             },
             Description: movie.Description,
             Year: movie.Year,
-            Genres: movie.Genres,
+            Genre: movie.Genre,
             Featured: movie.Featured,
             Actors: movie.Actors
           };
@@ -178,7 +179,7 @@ useEffect(() => {
                                     ) : (
                                         <>
                                             <Col xs={12} className="justify-content-md-center">
-                                            <Form xs={12} className="mt-5 w-100">
+                                            <Form xs={12} className="mt-5 mb-3 pt-5 w-100">
                                                 <Form.Control
                                                      type="search"
                                                      placeholder="Search by title"
