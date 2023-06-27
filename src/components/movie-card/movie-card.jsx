@@ -26,8 +26,8 @@ export const MovieCard = ({ movie, user, updateUserInfo }) => {
           </Link>
         
           {isFavorite
-        ? (<Button onClick={() => deleteFavorite(updateUserInfo, user.Username, movie)} variant='warning' className='m-3'>Remove from favorites</Button>)
-        : (<Button onClick={() => addFavorite(updateUserInfo, user.Username, movie)} variant='success' className='m-3'>Add to favorites</Button>)
+        ? (<Button onClick={() => deleteFavorite(updateUserInfo, user.Username, movie)} variant='warning' className='m-3'>Remove</Button>)
+        : (<Button onClick={() => addFavorite(updateUserInfo, user.Username, movie)} variant='success' className='m-3'>Add</Button>)
       }
       </Card>
     </div>
@@ -41,11 +41,11 @@ MovieCard.propTypes = {
     ImagePath: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     Genre: PropTypes.shape({
-      GenreName: PropTypes.string.isRequired,
+      Name: PropTypes.string.isRequired,
       Description: PropTypes.string.isRequired,
     }),
     Director: PropTypes.shape({
-      DirectorName: PropTypes.string.isRequired,
+      Name: PropTypes.string.isRequired,
       Bio: PropTypes.string.isRequired,
     }),
   }).isRequired,

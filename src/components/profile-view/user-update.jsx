@@ -4,7 +4,7 @@ import { UserDelete } from "./user-delete";
 // const apiURL = process.env.API_URL || 'http://localhost:8080/';
 
 export const UserUpdate = ({ updateUser, user}) => {
-    const [username, setUsername] = useState("");
+    const [Username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [birthdate, setBirthdate] = useState("");
@@ -14,7 +14,7 @@ export const UserUpdate = ({ updateUser, user}) => {
         event.preventDefault();
 
         const data = {
-            username: username,
+            username: Username,
             password: password,
             email: email,
         }
@@ -52,7 +52,7 @@ export const UserUpdate = ({ updateUser, user}) => {
    return (
         <>
             <Col md={6}>
-                <Card className="mt-5">
+                <Card className="mt-2">
                     <Card.Body>
                         <Card.Title>Update your info</Card.Title>
                         <Form onSubmit={handleSubmit}>
@@ -60,7 +60,7 @@ export const UserUpdate = ({ updateUser, user}) => {
                                 <Form.Label>Username:</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    value={username}
+                                    value={Username}
                                     onChange={e => setUsername(e.target.value)}
                                     required
                                     minLength="5"

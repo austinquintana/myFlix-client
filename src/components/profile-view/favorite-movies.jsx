@@ -6,21 +6,17 @@ import { Button } from 'react-bootstrap';
 import "./favorite-movies.scss";
 import { MovieCard } from "../movie-card/movie-card";
 
-export const FavoriteMovies = ({ user, movie, updateUserInfo, favoriteMovies }) => {
+export const FavoriteMovies = ({ user, movies, updateUserInfo }) => {
   const storedData = JSON.parse(localStorage.getItem("user"));
-  const favorites = storedData && storedData.favoriteMovies ? storedData.favoriteMovies : [];
-  const removeFav = (id) => {};
+  const favorites = user.favoriteMovies || [];
+  const favoriteMovies = movies.filter(m => favorites.includes(m._id));
 
   return (
-    <div className="fav-movie-container">
+    <div>
       <h2 className="my-custom-class">Favorite Movies</h2>
       <Row>
-          {favorites.map((movie) => (
-              <Col xs={12} md={6} lg={4} xl={3} xxl={2} key={movie._id}>
-                <img src={movie.ImagePath} />
-                <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-                    <Button className="border text-blue font-bold bg-gray-300 m-4" onClick={() => removeFav(movie._id)}>Remove from list</Button>
-                </Link>
+          {favoriteMovies.map((movie) => (
+              <Col xs={12} md={6} lg={3} xl={2} key={movie._id} className="fav-movie-container">
                   <MovieCard movie={movie} user={user} updateUserInfo={updateUserInfo} favoriteMovies={favoriteMovies}/>
               </Col>
                 ))}

@@ -34,27 +34,8 @@ export const MainView = () => {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        const moviesFromApi = data.map((movie) => {
-          return {
-            _id: movie._id,
-            Title: movie.Title,
-            ImagePath: movie.imagePath,
-            Director: {
-              Name: movie.Director.Name,
-              Bio: movie.Director.Bio,
-              Birth: movie.Director.Birth, 
-            },
-            Description: movie.Description,
-            Year: movie.Year,
-            Genre: movie.Genre,
-            Featured: movie.Featured,
-            Actors: movie.Actors
-          };
-        });
-
-
+      .then((moviesFromApi) => {
+        console.log(moviesFromApi);
         setMovies(moviesFromApi);
       })
       .catch((error) => {
@@ -146,7 +127,7 @@ useEffect(() => {
                                         setUser(null);
                                         setToken(null);
                                         localStorage.clear();
-                                    }} updateUser={updateUser}/>
+                                    }} updateUserInfo={updateUser}/>
                                 )}
                                 </>
                             }
@@ -190,7 +171,7 @@ useEffect(() => {
                                             </Form>
                                             </Col>
                                             {filteredMovies.map(movie => (
-                                                <Col className="mb-4" key={movie.id} xl={2} lg={3} md={4} xs={6}>
+                                                <Col className="mb-4" key={movie._id} xl={2} lg={3} md={4} xs={6}>
                                                     <MovieCard movie={movie} user={user} updateUserInfo={updateUser}/>
                                                 </Col>
                                             ))}

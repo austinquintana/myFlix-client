@@ -6,7 +6,7 @@ import { FavoriteMovies } from './favorite-movies';
 // user can be used to display the user in UserInfo
 // updateUserInfo can be used to update UserUpdate and UserMovieList
 // also: movies can be used to pass all movies to UserMovielist
-export const ProfileView = ({ user, movie, updateUserInfo }) => {
+export const ProfileView = ({ user, movies, updateUserInfo }) => {
 
   return (
     <div className="mt-5 pt-5">
@@ -15,7 +15,7 @@ export const ProfileView = ({ user, movie, updateUserInfo }) => {
       <br />
       <UserUpdate updateUserInfo={updateUserInfo} />
       <br />
-      <FavoriteMovies user={user} movie={movie} updateUserInfo={updateUserInfo}  />
+      <FavoriteMovies user={user} movies={movies} updateUserInfo={updateUserInfo}  />
     </div>
   
   )
