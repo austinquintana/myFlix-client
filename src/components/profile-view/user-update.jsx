@@ -3,20 +3,21 @@ import { Card, Col, Form, Button} from "react-bootstrap";
 import { UserDelete } from "./user-delete";
 // const apiURL = process.env.API_URL || 'http://localhost:8080/';
 
-export const UserUpdate = ({ updateUser, user}) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const [birthdate, setBirthdate] = useState("");
+export const UserUpdate = ({ updateUserInfo, user, token }) => {
+    console.log(user);
+
+    const [Username, setUsername] = useState("");
+    const [Password, setPassword] = useState("");
+    const [Email, setEmail] = useState("");
     const apiURL = process.env.API_URL || 'http://localhost:8080'; 
     
     const handleSubmit = event => {
         event.preventDefault();
 
         const data = {
-            username: username,
-            password: password,
-            email: email,
+            Username: Username,
+            Password: Password,
+            Email: Email,
         }
     
 
@@ -39,7 +40,7 @@ export const UserUpdate = ({ updateUser, user}) => {
         .then(user => {
             if (user) {
                 alert("Successfully changed userdata");
-                updateUser(user);
+                updateUserInfo(user);
             }
         })
         .catch(e => {
@@ -52,7 +53,7 @@ export const UserUpdate = ({ updateUser, user}) => {
    return (
         <>
             <Col md={6}>
-                <Card className="mt-5">
+                <Card className="mt-2">
                     <Card.Body>
                         <Card.Title>Update your info</Card.Title>
                         <Form onSubmit={handleSubmit}>
@@ -60,7 +61,7 @@ export const UserUpdate = ({ updateUser, user}) => {
                                 <Form.Label>Username:</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    value={username}
+                                    value={Username}
                                     onChange={e => setUsername(e.target.value)}
                                     required
                                     minLength="5"
@@ -70,8 +71,8 @@ export const UserUpdate = ({ updateUser, user}) => {
                             <Form.Group>
                                 <Form.Label>Password:</Form.Label>
                                 <Form.Control
-                                    type="password"
-                                    value={password}
+                                    type="Password"
+                                    value={Password}
                                     onChange={e => setPassword(e.target.value)}
                                     required
                                     minLength="8"
@@ -81,8 +82,8 @@ export const UserUpdate = ({ updateUser, user}) => {
                             <Form.Group>
                                 <Form.Label>Email:</Form.Label>
                                 <Form.Control
-                                    type="email"
-                                    value={email}
+                                    type="Email"
+                                    value={Email}
                                     onChange={e => setEmail(e.target.value)}
                                     required
                                     className="bg-light"
