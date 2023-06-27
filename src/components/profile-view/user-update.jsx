@@ -3,20 +3,21 @@ import { Card, Col, Form, Button} from "react-bootstrap";
 import { UserDelete } from "./user-delete";
 // const apiURL = process.env.API_URL || 'http://localhost:8080/';
 
-export const UserUpdate = ({ updateUser, user}) => {
+export const UserUpdate = ({ updateUserInfo, user, token }) => {
+    console.log(user);
+
     const [Username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const [birthdate, setBirthdate] = useState("");
+    const [Password, setPassword] = useState("");
+    const [Email, setEmail] = useState("");
     const apiURL = process.env.API_URL || 'http://localhost:8080'; 
     
     const handleSubmit = event => {
         event.preventDefault();
 
         const data = {
-            username: Username,
-            password: password,
-            email: email,
+            Username: Username,
+            Password: Password,
+            Email: Email,
         }
     
 
@@ -39,7 +40,7 @@ export const UserUpdate = ({ updateUser, user}) => {
         .then(user => {
             if (user) {
                 alert("Successfully changed userdata");
-                updateUser(user);
+                updateUserInfo(user);
             }
         })
         .catch(e => {
@@ -70,8 +71,8 @@ export const UserUpdate = ({ updateUser, user}) => {
                             <Form.Group>
                                 <Form.Label>Password:</Form.Label>
                                 <Form.Control
-                                    type="password"
-                                    value={password}
+                                    type="Password"
+                                    value={Password}
                                     onChange={e => setPassword(e.target.value)}
                                     required
                                     minLength="8"
@@ -81,8 +82,8 @@ export const UserUpdate = ({ updateUser, user}) => {
                             <Form.Group>
                                 <Form.Label>Email:</Form.Label>
                                 <Form.Control
-                                    type="email"
-                                    value={email}
+                                    type="Email"
+                                    value={Email}
                                     onChange={e => setEmail(e.target.value)}
                                     required
                                     className="bg-light"
