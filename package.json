@@ -22,6 +22,7 @@
     "react-scripts": "4.0.0"
   },
   "devDependencies": {
+    "@parcel/css": "^1.14.0",
     "@parcel/transformer-sass": "^2.9.1",
     "parcel": "^2.9.1",
     "process": "^0.11.10"
