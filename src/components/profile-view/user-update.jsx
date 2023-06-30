@@ -33,13 +33,13 @@ export const UserUpdate = ({ updateUserInfo, user, token }) => {
             if (response.ok) {
                 return response.json();
             } else {
-                alert("Changing userdata failed");
+                alert("Changing user data failed");
                 return false;
             }
         })
         .then(user => {
             if (user) {
-                alert("Successfully changed userdata");
+                alert("Successfully changed user data");
                 updateUserInfo(user);
             }
         })

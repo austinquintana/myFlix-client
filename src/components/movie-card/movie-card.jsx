@@ -14,7 +14,7 @@ export const MovieCard = ({ movie, user, updateUserInfo }) => {
   }, [user, movie]);
 
   return (
-    <div className="movie-card-container">
+   <div className="movie-card-container">
       <Card className="movie-card">
         <Card.Img variant='top' src={movie.ImagePath} alt={movie.Title} />
         <Card.Body>

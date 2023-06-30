@@ -46993,7 +46993,7 @@ const MovieCard = ({ movie , user , updateUserInfo  })=>{
     }, void 0, false, {
         fileName: "src/components/movie-card/movie-card.jsx",
         lineNumber: 17,
-        columnNumber: 5
+        columnNumber: 4
     }, undefined);
 };
 _s(MovieCard, "lh6fxD9+vLbuebOO0x4Y5WwBqk4=");
@@ -47861,12 +47861,12 @@ const UserUpdate = ({ updateUserInfo , user , token  })=>{
         }).then((response)=>{
             if (response.ok) return response.json();
             else {
-                alert("Changing userdata failed");
+                alert("Changing user data failed");
                 return false;
             }
         }).then((user)=>{
             if (user) {
-                alert("Successfully changed userdata");
+                alert("Successfully changed user data");
                 updateUserInfo(user);
             }
         }).catch((e)=>{
