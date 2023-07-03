@@ -3,26 +3,30 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./movie-view.scss";
-import { addFavorite, deleteFavorite } from '../../api.js';
+import { addFavorite, deleteFavorite } from "../../api.js";
 
 export const MovieView = ({ movies, user, updateUserInfo }) => {
   const [isFavorite, setIsFavorite] = React.useState(false);
   const p = useParams();
-  const movie = movies.find( m => m._id === p.id);
+  const movie = movies.find((m) => m._id === p.id);
   if (!movie) {
     return <div>Loading...</div>;
   }
 
-   useEffect(() => {
+  useEffect(() => {
     if (user.favoriteMovies && movie._id) {
-      setIsFavorite(user.favoriteMovies.includes(movie._id))
+      setIsFavorite(user.favoriteMovies.includes(movie._id));
     }
   }, [user, movie]);
 
   return (
     <div className="movie-view">
       <div className="movie-container">
-        <img className="w-50 movie-image" src={movie.ImagePath} alt={movie.Title} />
+        <img
+          className="w-50 movie-image"
+          src={movie.ImagePath}
+          alt={movie.Title}
+        />
       </div>
       <div>
         <h2>{movie.Title}</h2>
@@ -51,14 +55,26 @@ export const MovieView = ({ movies, user, updateUserInfo }) => {
         <h4>Genre Description: </h4>
         <p>{movie.Genre.Description}</p>
       </div>
-      {isFavorite
-        ? (<Button onClick={() => deleteFavorite(updateUserInfo, user.Username, movie)} variant='warning' className='m-3'>Remove from favorites</Button>)
-        : (<Button onClick={() => addFavorite(updateUserInfo, user.Username, movie)} variant='success' className='m-3'>Add to favorites</Button>)
-      }
+      {isFavorite ? (
+        <Button
+          onClick={() => deleteFavorite(updateUserInfo, user.Username, movie)}
+          variant="warning"
+          className="m-3"
+        >
+          Remove from favorites
+        </Button>
+      ) : (
+        <Button
+          onClick={() => addFavorite(updateUserInfo, user.Username, movie)}
+          variant="success"
+          className="m-3"
+        >
+          Add to favorites
+        </Button>
+      )}
       <Link to={`/`}>
         <button className="back-button m-3">Back</button>
       </Link>
-
     </div>
   );
 };
