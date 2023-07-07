@@ -27,8 +27,7 @@ export const MainView = () => {
     if (!token) return;
 
     fetch(`${apiURL}/movies`, {
-      headers: 
-      { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((moviesFromApi) => {
