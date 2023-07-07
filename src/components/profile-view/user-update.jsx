@@ -26,6 +26,8 @@ export const UserUpdate = ({ updateUserInfo, user, token }) => {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
       },
     })
       .then((response) => {

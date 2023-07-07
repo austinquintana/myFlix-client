@@ -21,6 +21,8 @@ export const LoginView = ({ onLoggedIn }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
         // add cors header -- every api call 
       },
       body: JSON.stringify(data),
