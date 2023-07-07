@@ -31,8 +31,6 @@ export const SignupView = () => {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
     }).then((response) => {
       if (response.ok) {
         alert("Signup successful");
