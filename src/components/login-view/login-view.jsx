@@ -53,7 +53,7 @@ export const LoginView = ({ onLoggedIn }) => {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                minLength={6}
+                minLength={5}
                 required
               />
             </Form.Group>
